@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "900912693370",
+    "firebase_url": "https://lab5iot-bf87d-default-rtdb.firebaseio.com",
     "project_id": "lab5iot-bf87d",
     "storage_bucket": "lab5iot-bf87d.appspot.com"
   },
@@ -14,11 +15,35 @@
       },
       "oauth_client": [
         {
+          "client_id": "900912693370-d29t7ifdedoh75esdajl791jltr9acbp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.edu.pucp.lab5",
+            "certificate_hash": "6efe011021fd6cfe8907bc5f4fccf698ad8a70cd"
+          }
+        },
+        {
           "client_id": "900912693370-fbrpb6908b2595glussippnjroc2vht4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "pe.edu.pucp.lab5",
             "certificate_hash": "bf5f550fa05e7d2c0bf7bc2a3596d60385666621"
+          }
+        },
+        {
+          "client_id": "900912693370-j78edh4n5m3rd1kmh8fs87ngfopkjba3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.edu.pucp.lab5",
+            "certificate_hash": "086b671d7ee57b1b749449e62b1a11189e3a99ee"
+          }
+        },
+        {
+          "client_id": "900912693370-scd9soob5hmk41g191laot6nsbb9dj2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.edu.pucp.lab5",
+            "certificate_hash": "93438082434505dcfc3e101d46932e8d0f1b9e24"
           }
         },
         {
