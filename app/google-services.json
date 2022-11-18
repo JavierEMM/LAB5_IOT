@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "900912693370",
+    "project_id": "lab5iot-bf87d",
+    "storage_bucket": "lab5iot-bf87d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900912693370:android:c33c7865db5c04023b3bc3",
+        "android_client_info": {
+          "package_name": "pe.edu.pucp.lab5"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "900912693370-fbrpb6908b2595glussippnjroc2vht4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.edu.pucp.lab5",
+            "certificate_hash": "bf5f550fa05e7d2c0bf7bc2a3596d60385666621"
+          }
+        },
+        {
+          "client_id": "900912693370-71udfb9d6mh9jfjnpl7caupa54vmi3bg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsaZq1FNz0-MUfCb94KxjldKv9dyq2YZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "900912693370-71udfb9d6mh9jfjnpl7caupa54vmi3bg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
