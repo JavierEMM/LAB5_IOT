@@ -3,7 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/btn_calendar"
         android:icon="@drawable/ic_baseline_calendar_today_24"
         android:title="Item"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/btn_fechaInicio"
+        android:title="Fecha Inicio" />
+    <item
+        android:id="@+id/btn_horaInicio"
+        android:title="Hora Inicio" />
+    <item
+        android:id="@+id/btn_fechaFinal"
+        android:title="Fecha Final" />
+    <item
+        android:id="@+id/btn_horaFinal"
+        android:title="Hora Final" />
 </menu>
