@@ -30,7 +30,7 @@ public class ListarActivity extends AppCompatActivity {
             case R.id.btn_calendar:
                 View menuItemView = findViewById(R.id.btn_calendar);
                 PopupMenu popupMenu = new PopupMenu(this,menuItemView);
-                popupMenu.getMenuInflater().inflate(R.menu.menu_listar,popupMenu.getMenu());
+                popupMenu.getMenuInflater().inflate(R.menu.menu_popup,popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
@@ -52,7 +52,7 @@ public class ListarActivity extends AppCompatActivity {
                         }
                     }
                 });
-                return true;
+                popupMenu.show();
         }
         return super.onOptionsItemSelected(item);
     }
