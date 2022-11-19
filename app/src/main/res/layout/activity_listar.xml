@@ -17,4 +17,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.103" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerActividades"
+        android:layout_width="329dp"
+        android:layout_height="525dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.609"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.553" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
