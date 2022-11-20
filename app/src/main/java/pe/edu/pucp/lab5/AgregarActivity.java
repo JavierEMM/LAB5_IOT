@@ -53,7 +53,6 @@ public class AgregarActivity extends AppCompatActivity {
                                 long bytesTotales = snapshot.getTotalByteCount();
                                 double progreso = (100.0 * bytesTransferidos) / bytesTotales;
                                 Log.d("msg","Porcentaje de subida: " + Math.round(progreso) + "%");
-
                             });
                 }
             });
