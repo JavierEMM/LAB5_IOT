@@ -167,7 +167,7 @@ public class AgregarActivity extends AppCompatActivity {
                 String[] fechaInicioS = fechaInicioStr.split("/");
                 String[] fechaFinalS = fechaFinalStr.split("/");
                 String[] horaInicioS = horaInicioStr.split(":");
-                String[] HoraFinalS = horaFinalStr.split(":");
+                String[] horaFinalS = horaFinalStr.split(":");
                 if(uri != null){
                     StorageReference child = storage.getReference().child(user.getUid()+"/"+uri.hashCode()+".jpg");
                     child.putFile(uri)
@@ -207,7 +207,15 @@ public class AgregarActivity extends AppCompatActivity {
                 } else if(Integer.parseInt(fechaFinalS[0])<Integer.parseInt(fechaInicioS[0])){
                     editTextFechaFinal.setError("La fecha final no puede ser menor a la inicial");
                     editTextFechaFinal.requestFocus();
-                } else {
+                } else if(fechaInicioStr==fechaFinalStr){
+                    if(Integer.parseInt(horaFinalS[0])<Integer.parseInt(horaInicioS[0])){
+                        editTextHoraFinal.setError("La hora final no puede ser menor a la incial");
+                        editTextHoraFinal.requestFocus();
+                    }else if(Integer.parseInt(horaFinalS[0])<Integer.parseInt(horaInicioS[0])){
+                        editTextHoraFinal.setError("La hora final no puede ser menor a la incial");
+                        editTextHoraFinal.requestFocus();
+                    }
+                }else {
                     Actividad actividad = new Actividad();
                     actividad.setTitulo(tituloStr);
                     actividad.setDescripcion(descripcionStr);
