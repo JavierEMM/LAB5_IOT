@@ -81,7 +81,7 @@ public class AgregarActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AgregarActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        String fecha = i2 + "/" + i1 + "/" + i;
+                        String fecha = i2 + "/" + (i1+1) + "/" + i;
                         editTextFechaInicio.setText(fecha);
                     }
                 },anio,mes,dia);
@@ -119,7 +119,7 @@ public class AgregarActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AgregarActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        String fecha = i2 + "/" + i1 + "/" + i;
+                        String fecha = i2 + "/" + (i1+1) + "/" + i;
                         editTextFechaFinal.setText(fecha);
                     }
                 },anio,mes,dia);
@@ -173,17 +173,51 @@ public class AgregarActivity extends AppCompatActivity {
                 String horaInicioStr = editTextHoraInicio.getText().toString();
                 String fechaFinalStr = editTextFechaFinal.getText().toString();
                 String horaFinalStr = editTextHoraFinal.getText().toString();
-                Actividad actividad = new Actividad();
-                actividad.setTitulo(tituloStr);
-                actividad.setDescripcion(descripcionStr);
-                actividad.setFechaInicio(fechaInicioStr);
-                actividad.setHoraInicio(horaInicioStr);
-                actividad.setFechaFin(fechaFinalStr);
-                actividad.setHoraFin(horaFinalStr);
-                actividad.setFoto("photo.jpg");
-                databaseReference.push().setValue(actividad);
-                Intent intent = new Intent(AgregarActivity.this,ListarActivity.class);
-                startActivity(intent);
+
+                String[] fechaInicioS = fechaInicioStr.split("/");
+                String[] fechaFinalS = fechaFinalStr.split("/");
+                String[] horaInicioS = horaInicioStr.split(":");
+                String[] HoraFinalS = horaFinalStr.split(":");
+
+                if(tituloStr.trim().isEmpty()){
+                    editTextTitulo.setError("No puede ser vacio");
+                    editTextTitulo.requestFocus();
+                }else if(descripcionStr.trim().isEmpty()){
+                    editTextDescripcion.setError("No puede ser vacío");
+                    editTextDescripcion.requestFocus();
+                }else if(fechaInicioStr.trim().isEmpty()){
+                    editTextFechaInicio.setError("Elija la fecha");
+                    editTextFechaInicio.requestFocus();
+                }else if(horaInicioStr.trim().isEmpty()){
+                    editTextHoraInicio.setError("Elija la hora");
+                    editTextHoraInicio.requestFocus();
+                }else if(fechaFinalStr.trim().isEmpty()){
+                    editTextFechaFinal.setError("Elija la fecha");
+                    editTextFechaFinal.requestFocus();
+                }else if(horaFinalStr.trim().isEmpty()){
+                    editTextHoraFinal.setError("Elija la hora");
+                    editTextHoraFinal.requestFocus();
+                }else if(Integer.parseInt(fechaFinalS[2])<Integer.parseInt(fechaInicioS[2])){
+                    editTextFechaFinal.setError("La fecha final no puede ser menor a la inicial");
+                    editTextFechaFinal.requestFocus();
+                }else if(Integer.parseInt(fechaFinalS[1])<Integer.parseInt(fechaInicioS[1])){
+                    editTextFechaFinal.setError("La fecha final no puede ser menor a la inicial");
+                    editTextFechaFinal.requestFocus();
+                } else if(Integer.parseInt(fechaFinalS[0])<Integer.parseInt(fechaInicioS[0])){
+                    editTextFechaFinal.setError("La fecha final no puede ser menor a la inicial");
+                    editTextFechaFinal.requestFocus();
+                } else {
+                    Actividad actividad = new Actividad();
+                    actividad.setTitulo(tituloStr);
+                    actividad.setDescripcion(descripcionStr);
+                    actividad.setFechaInicio(fechaInicioStr);
+                    actividad.setHoraInicio(horaInicioStr);
+                    actividad.setFechaFin(fechaFinalStr);
+                    actividad.setHoraFin(horaFinalStr);
+                    databaseReference.push().setValue(actividad);
+                    Intent intent = new Intent(AgregarActivity.this, ListarActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
