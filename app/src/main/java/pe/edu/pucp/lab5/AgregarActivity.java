@@ -32,14 +32,14 @@ import pe.edu.pucp.lab5.Entity.Actividad;
 public class AgregarActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
-    FirebaseStorage firebaseStorage;
-    StorageReference storageReference;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageReference = storage.getReference();
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == RESULT_OK){
                     Uri uri = result.getData().getData();
-                    StorageReference child = storageReference.child("photo.jpg");
+                    StorageReference child = storage.getReference().child("photo.jpg");
                     child.putFile(uri)
                             .addOnSuccessListener(taskSnapshot -> Log.d("msg","archivo subido exitosamente"))
                             .addOnFailureListener(e -> Log.d("msg","error",e.getCause()))
@@ -60,13 +60,10 @@ public class AgregarActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
-        firebaseStorage = firebaseStorage.getInstance();
 
         EditText editTextTitulo = findViewById(R.id.editText_titulo);
-        String tituloStr = editTextTitulo.getText().toString();
 
         EditText editTextDescripcion = findViewById(R.id.editText_descripcion);
-        String descripcionStr = editTextDescripcion.getText().toString();
 
         EditText editTextFechaInicio = findViewById(R.id.editTextFechaInicio);
         Button btnInicio = findViewById(R.id.btnFechaInicio);
@@ -87,7 +84,6 @@ public class AgregarActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-        String fechaInicioStr = editTextFechaInicio.getText().toString();
 
         EditText editTextHoraInicio = findViewById(R.id.editTextHoraInicio);
         Button btnHoraInicio = findViewById(R.id.btnHoraInicio);
@@ -106,7 +102,6 @@ public class AgregarActivity extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
-        String horaInicioStr = editTextHoraInicio.getText().toString();
 
         EditText editTextFechaFinal = findViewById(R.id.editTextFechaFinal);
         Button btnFinal = findViewById(R.id.btnFechaFinal);
@@ -127,7 +122,6 @@ public class AgregarActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-        String fechaFinalStr = editTextFechaFinal.getText().toString();
 
         EditText editTextHoraFinal = findViewById(R.id.editTextHoraFinal);
         Button btnHoraFinal = findViewById(R.id.btnHoraFinal);
@@ -146,7 +140,6 @@ public class AgregarActivity extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
-        String horaFinalStr = editTextHoraFinal.getText().toString();
 
         Button btnimagen = findViewById(R.id.btnImagen);
         btnimagen.setOnClickListener(new View.OnClickListener() {
@@ -158,14 +151,23 @@ public class AgregarActivity extends AppCompatActivity {
             }
         });
 
+        StorageReference reference = storage.getReference();
+        storageReference = reference.child("imagenes");
+
         StorageReference photoRef = storageReference.child("photo.jpg");
         ImageView imageView = findViewById(R.id.imageView);
-        Glide.with(this).load(photoRef).into(imageView);
+        Glide.with(AgregarActivity.this).load(photoRef).into(imageView);
 
         Button btnAgregar = findViewById(R.id.btnAgregar);
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String tituloStr = editTextTitulo.getText().toString();
+                String descripcionStr = editTextDescripcion.getText().toString();
+                String fechaInicioStr = editTextFechaInicio.getText().toString();
+                String horaInicioStr = editTextHoraInicio.getText().toString();
+                String fechaFinalStr = editTextFechaFinal.getText().toString();
+                String horaFinalStr = editTextHoraFinal.getText().toString();
                 Actividad actividad = new Actividad();
                 actividad.setTitulo(tituloStr);
                 actividad.setDescripcion(descripcionStr);

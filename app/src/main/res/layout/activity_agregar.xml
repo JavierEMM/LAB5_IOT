@@ -93,8 +93,8 @@
 
     <EditText
         android:id="@+id/editText_titulo"
-        android:layout_width="208dp"
-        android:layout_height="24dp"
+        android:layout_width="211dp"
+        android:layout_height="34dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -106,8 +106,8 @@
 
     <EditText
         android:id="@+id/editText_descripcion"
-        android:layout_width="210dp"
-        android:layout_height="21dp"
+        android:layout_width="214dp"
+        android:layout_height="29dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -167,8 +167,8 @@
 
     <EditText
         android:id="@+id/editTextFechaInicio"
-        android:layout_width="215dp"
-        android:layout_height="26dp"
+        android:layout_width="222dp"
+        android:layout_height="28dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -217,8 +217,8 @@
 
     <EditText
         android:id="@+id/editTextHoraFinal"
-        android:layout_width="221dp"
-        android:layout_height="20dp"
+        android:layout_width="223dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -242,8 +242,8 @@
 
     <EditText
         android:id="@+id/editTextHoraInicio"
-        android:layout_width="215dp"
-        android:layout_height="21dp"
+        android:layout_width="212dp"
+        android:layout_height="33dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
