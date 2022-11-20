@@ -59,7 +59,7 @@ public class AgregarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_agregar);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference();
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("activities");
 
         EditText editTextTitulo = findViewById(R.id.editText_titulo);
 
