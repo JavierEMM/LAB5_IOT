@@ -72,16 +72,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fecha Final"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="331dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.464" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hora Final"
-        tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="423dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.594" />
 
     <EditText
         android:id="@+id/editText_titulo"
@@ -114,27 +122,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Imagen"
-        tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="508dp" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.126"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.907" />
+        app:layout_constraintVertical_bias="0.713" />
+
+    <Button
+        android:id="@+id/btnImagen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subir Imagen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.918"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.796" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="127dp"
         android:layout_height="104dp"
-        tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="508dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.394"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.81"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
@@ -142,8 +158,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Abrir Calendario"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="163dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.731"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.238" />
 
     <EditText
         android:id="@+id/editTextFechaInicio"
@@ -151,16 +171,24 @@
         android:layout_height="26dp"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="211dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.852"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.299" />
 
     <Button
         android:id="@+id/btnFechaFinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Abrir Calendario"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="331dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.722"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.483" />
 
     <EditText
         android:id="@+id/editTextFechaFinal"
@@ -168,16 +196,24 @@
         android:layout_height="23dp"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="168dp"
-        tools:layout_editor_absoluteY="389dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.545" />
 
     <Button
         android:id="@+id/btnHoraInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ingresar Hora"
-        tools:layout_editor_absoluteX="168dp"
-        tools:layout_editor_absoluteY="240dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.654"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.36" />
 
     <EditText
         android:id="@+id/editTextHoraFinal"
@@ -185,16 +221,24 @@
         android:layout_height="20dp"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="479dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.884"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.662" />
 
     <Button
         android:id="@+id/btnHoraFinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ingresar Hora"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="423dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.654"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.619" />
 
     <EditText
         android:id="@+id/editTextHoraInicio"
@@ -202,7 +246,35 @@
         android:layout_height="21dp"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="301dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.423" />
+
+    <Button
+        android:id="@+id/btnAgregar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agregar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.939" />
+
+    <Button
+        android:id="@+id/btnCancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.779"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.939" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
