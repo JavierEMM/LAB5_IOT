@@ -34,6 +34,7 @@ import pe.edu.pucp.lab5.Entity.Actividad;
 public class AgregarActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
+    Uri uri;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser user = firebaseAuth.getCurrentUser();
     FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -42,7 +43,7 @@ public class AgregarActivity extends AppCompatActivity {
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == RESULT_OK){
-                    Uri uri = result.getData().getData();
+                    uri = result.getData().getData();
                     StorageReference child = storage.getReference().child(user.getUid()+"/"+uri.hashCode()+".jpg");
                     child.putFile(uri)
                             .addOnSuccessListener(taskSnapshot -> Log.d("msg","archivo subido exitosamente"))
@@ -156,9 +157,8 @@ public class AgregarActivity extends AppCompatActivity {
         });
 
         StorageReference reference = storage.getReference();
-        storageReference = reference.child("imagenes");
 
-        StorageReference photoRef = storageReference.child("photo.jpg");
+        StorageReference photoRef = reference.child(user.getUid()+"/"+uri.hashCode()+".jpg");
         ImageView imageView = findViewById(R.id.imageView);
         Glide.with(AgregarActivity.this).load(photoRef).into(imageView);
 
