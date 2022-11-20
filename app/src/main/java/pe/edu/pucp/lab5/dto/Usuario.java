@@ -10,6 +10,9 @@ public class Usuario {
         this.apellido = apellido;
         this.correo = correo;
     }
+    public Usuario(String correo) {
+        this.correo = correo;
+    }
 
     public String getNombre() {
         return nombre;

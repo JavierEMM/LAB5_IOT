@@ -44,16 +44,6 @@ public class AgregarActivity extends AppCompatActivity {
             result -> {
                 if (result.getResultCode() == RESULT_OK){
                     uri = result.getData().getData();
-                    StorageReference child = storage.getReference().child(user.getUid()+"/"+uri.hashCode()+".jpg");
-                    child.putFile(uri)
-                            .addOnSuccessListener(taskSnapshot -> Log.d("msg","archivo subido exitosamente"))
-                            .addOnFailureListener(e -> Log.d("msg","error",e.getCause()))
-                            .addOnProgressListener(snapshot -> {
-                                long bytesTransferidos = snapshot.getBytesTransferred();
-                                long bytesTotales = snapshot.getTotalByteCount();
-                                double progreso = (100.0 * bytesTransferidos) / bytesTotales;
-                                Log.d("msg","Porcentaje de subida: " + Math.round(progreso) + "%");
-                            });
                 }
             });
 
@@ -63,7 +53,7 @@ public class AgregarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_agregar);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child("activities");
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
 
         EditText editTextTitulo = findViewById(R.id.editText_titulo);
 
@@ -178,7 +168,18 @@ public class AgregarActivity extends AppCompatActivity {
                 String[] fechaFinalS = fechaFinalStr.split("/");
                 String[] horaInicioS = horaInicioStr.split(":");
                 String[] HoraFinalS = horaFinalStr.split(":");
-
+                if(uri != null){
+                    StorageReference child = storage.getReference().child(user.getUid()+"/"+uri.hashCode()+".jpg");
+                    child.putFile(uri)
+                            .addOnSuccessListener(taskSnapshot -> Log.d("msg","archivo subido exitosamente"))
+                            .addOnFailureListener(e -> Log.d("msg","error",e.getCause()))
+                            .addOnProgressListener(snapshot -> {
+                                long bytesTransferidos = snapshot.getBytesTransferred();
+                                long bytesTotales = snapshot.getTotalByteCount();
+                                double progreso = (100.0 * bytesTransferidos) / bytesTotales;
+                                Log.d("msg","Porcentaje de subida: " + Math.round(progreso) + "%");
+                            });
+                }
                 if(tituloStr.trim().isEmpty()){
                     editTextTitulo.setError("No puede ser vacio");
                     editTextTitulo.requestFocus();
@@ -214,7 +215,7 @@ public class AgregarActivity extends AppCompatActivity {
                     actividad.setHoraInicio(horaInicioStr);
                     actividad.setFechaFin(fechaFinalStr);
                     actividad.setHoraFin(horaFinalStr);
-                    databaseReference.push().setValue(actividad);
+                    databaseReference.child("users").child(user.getUid()).child("activities").push().setValue(actividad);
                     Intent intent = new Intent(AgregarActivity.this, ListarActivity.class);
                     startActivity(intent);
                 }

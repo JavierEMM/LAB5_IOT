@@ -58,7 +58,7 @@ public class RegistroActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                databaseReference.child("users").push().setValue(new Usuario(nombre.getText().toString(),apellido.getText().toString(),correo.getText().toString())).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).setValue(new Usuario(nombre.getText().toString(),apellido.getText().toString(),correo.getText().toString())).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task){
                                         if(task.isSuccessful()){
