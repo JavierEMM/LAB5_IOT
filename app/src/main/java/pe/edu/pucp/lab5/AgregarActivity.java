@@ -156,8 +156,10 @@ public class AgregarActivity extends AppCompatActivity {
         });
 
         StorageReference reference = storage.getReference();
-
-        StorageReference photoRef = reference.child(user.getUid()+"/"+uri.hashCode()+".jpg");
+        StorageReference photoRef = reference;
+        if(uri != null){
+            photoRef = reference.child(user.getUid()+"/"+uri.hashCode()+".jpg");
+        }
         ImageView imageView = findViewById(R.id.imageView);
         Glide.with(AgregarActivity.this).load(photoRef).into(imageView);
 
