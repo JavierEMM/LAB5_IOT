@@ -9,7 +9,7 @@ public class Actividad {
     private String FechaFin;
     private String horaInicio;
     private String horaFin;
-    private Image foto;
+    private String foto;
 
     public Actividad() {
     }
@@ -62,11 +62,11 @@ public class Actividad {
         this.horaFin = horaFin;
     }
 
-    public Image getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(Image foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 }
