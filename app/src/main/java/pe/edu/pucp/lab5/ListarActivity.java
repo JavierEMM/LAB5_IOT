@@ -46,7 +46,7 @@ public class ListarActivity extends AppCompatActivity {
         adapter.setContext(ListarActivity.this);
         firebaseDatabase= FirebaseDatabase.getInstance();
 
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child("Actividades");
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("activities");
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
