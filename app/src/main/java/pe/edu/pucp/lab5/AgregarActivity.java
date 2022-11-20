@@ -20,6 +20,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -32,6 +34,8 @@ import pe.edu.pucp.lab5.Entity.Actividad;
 public class AgregarActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = firebaseAuth.getCurrentUser();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference = storage.getReference();
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
@@ -39,7 +43,7 @@ public class AgregarActivity extends AppCompatActivity {
             result -> {
                 if (result.getResultCode() == RESULT_OK){
                     Uri uri = result.getData().getData();
-                    StorageReference child = storage.getReference().child("photo.jpg");
+                    StorageReference child = storage.getReference().child(user.getUid()+"/"+uri.hashCode()+".jpg");
                     child.putFile(uri)
                             .addOnSuccessListener(taskSnapshot -> Log.d("msg","archivo subido exitosamente"))
                             .addOnFailureListener(e -> Log.d("msg","error",e.getCause()))
