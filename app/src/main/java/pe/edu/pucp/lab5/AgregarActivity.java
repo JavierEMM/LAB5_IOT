@@ -207,7 +207,7 @@ public class AgregarActivity extends AppCompatActivity {
                 } else if(Integer.parseInt(fechaFinalS[0])<Integer.parseInt(fechaInicioS[0])){
                     editTextFechaFinal.setError("La fecha final no puede ser menor a la inicial");
                     editTextFechaFinal.requestFocus();
-                } else if(fechaInicioStr==fechaFinalStr){
+                } else if(fechaInicioStr.equals(fechaFinalStr)){
                     if(Integer.parseInt(horaFinalS[0])<Integer.parseInt(horaInicioS[0])){
                         editTextHoraFinal.setError("La hora final no puede ser menor a la incial");
                         editTextHoraFinal.requestFocus();
