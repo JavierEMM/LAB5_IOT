@@ -66,6 +66,7 @@ public class ListaActividadesAdapter  extends RecyclerView.Adapter<ListaActivida
 
         textViewTitulo.setText(a.getTitulo());
         textViewFechaInicio.setText(a.getFechaInicio());
+        textViewFechaFin.setText(a.getFechaFin());
         textViewHoraFin.setText(a.getHoraFin());
         textViewHoraInicio.setText(a.getHoraInicio());
 

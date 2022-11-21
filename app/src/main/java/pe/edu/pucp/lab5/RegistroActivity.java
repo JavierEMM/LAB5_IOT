@@ -3,6 +3,7 @@ package pe.edu.pucp.lab5;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -58,7 +59,7 @@ public class RegistroActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                databaseReference.child("users").push().setValue(new Usuario(nombre.getText().toString(),apellido.getText().toString(),correo.getText().toString())).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).setValue(new Usuario(nombre.getText().toString(),apellido.getText().toString(),correo.getText().toString())).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task){
                                         if(task.isSuccessful()){
@@ -66,7 +67,9 @@ public class RegistroActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if(task.isSuccessful()){
+                                                        startActivity(new Intent(RegistroActivity.this,LoginActivity.class));
                                                         Toast.makeText(RegistroActivity.this,"Usuario guardado correctamente",Toast.LENGTH_SHORT).show();
+                                                        finish();
                                                     }else{
                                                         Toast.makeText(RegistroActivity.this,"Error al enviar verificación",Toast.LENGTH_SHORT).show();
                                                     }

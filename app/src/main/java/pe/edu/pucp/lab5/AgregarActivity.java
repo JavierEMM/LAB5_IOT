@@ -20,6 +20,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -32,24 +34,16 @@ import pe.edu.pucp.lab5.Entity.Actividad;
 public class AgregarActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
+    Uri uri;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = firebaseAuth.getCurrentUser();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference = storage.getReference();
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == RESULT_OK){
-                    Uri uri = result.getData().getData();
-                    StorageReference child = storage.getReference().child("photo.jpg");
-                    child.putFile(uri)
-                            .addOnSuccessListener(taskSnapshot -> Log.d("msg","archivo subido exitosamente"))
-                            .addOnFailureListener(e -> Log.d("msg","error",e.getCause()))
-                            .addOnProgressListener(snapshot -> {
-                                long bytesTransferidos = snapshot.getBytesTransferred();
-                                long bytesTotales = snapshot.getTotalByteCount();
-                                double progreso = (100.0 * bytesTransferidos) / bytesTotales;
-                                Log.d("msg","Porcentaje de subida: " + Math.round(progreso) + "%");
-
-                            });
+                    uri = result.getData().getData();
                 }
             });
 
@@ -77,7 +71,7 @@ public class AgregarActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AgregarActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        String fecha = i2 + "/" + i1 + "/" + i;
+                        String fecha = i2 + "/" + (i1+1) + "/" + i;
                         editTextFechaInicio.setText(fecha);
                     }
                 },anio,mes,dia);
@@ -115,7 +109,7 @@ public class AgregarActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AgregarActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        String fecha = i2 + "/" + i1 + "/" + i;
+                        String fecha = i2 + "/" + (i1+1) + "/" + i;
                         editTextFechaFinal.setText(fecha);
                     }
                 },anio,mes,dia);
@@ -152,9 +146,10 @@ public class AgregarActivity extends AppCompatActivity {
         });
 
         StorageReference reference = storage.getReference();
-        storageReference = reference.child("imagenes");
-
-        StorageReference photoRef = storageReference.child("photo.jpg");
+        StorageReference photoRef = reference;
+        if(uri != null){
+            photoRef = reference.child(user.getUid()+"/"+uri.hashCode()+".jpg");
+        }
         ImageView imageView = findViewById(R.id.imageView);
         Glide.with(AgregarActivity.this).load(photoRef).into(imageView);
 
@@ -168,17 +163,70 @@ public class AgregarActivity extends AppCompatActivity {
                 String horaInicioStr = editTextHoraInicio.getText().toString();
                 String fechaFinalStr = editTextFechaFinal.getText().toString();
                 String horaFinalStr = editTextHoraFinal.getText().toString();
-                Actividad actividad = new Actividad();
-                actividad.setTitulo(tituloStr);
-                actividad.setDescripcion(descripcionStr);
-                actividad.setFechaInicio(fechaInicioStr);
-                actividad.setHoraInicio(horaInicioStr);
-                actividad.setFechaFin(fechaFinalStr);
-                actividad.setHoraFin(horaFinalStr);
-                actividad.setFoto("photo.jpg");
-                databaseReference.push().setValue(actividad);
-                Intent intent = new Intent(AgregarActivity.this,ListarActivity.class);
-                startActivity(intent);
+
+                String[] fechaInicioS = fechaInicioStr.split("/");
+                String[] fechaFinalS = fechaFinalStr.split("/");
+                String[] horaInicioS = horaInicioStr.split(":");
+                String[] horaFinalS = horaFinalStr.split(":");
+                if(uri != null){
+                    StorageReference child = storage.getReference().child(user.getUid()+"/"+uri.hashCode()+".jpg");
+                    child.putFile(uri)
+                            .addOnSuccessListener(taskSnapshot -> Log.d("msg","archivo subido exitosamente"))
+                            .addOnFailureListener(e -> Log.d("msg","error",e.getCause()))
+                            .addOnProgressListener(snapshot -> {
+                                long bytesTransferidos = snapshot.getBytesTransferred();
+                                long bytesTotales = snapshot.getTotalByteCount();
+                                double progreso = (100.0 * bytesTransferidos) / bytesTotales;
+                                Log.d("msg","Porcentaje de subida: " + Math.round(progreso) + "%");
+                            });
+                }
+                if(tituloStr.trim().isEmpty()){
+                    editTextTitulo.setError("No puede ser vacio");
+                    editTextTitulo.requestFocus();
+                }else if(descripcionStr.trim().isEmpty()){
+                    editTextDescripcion.setError("No puede ser vacío");
+                    editTextDescripcion.requestFocus();
+                }else if(fechaInicioStr.trim().isEmpty()){
+                    editTextFechaInicio.setError("Elija la fecha");
+                    editTextFechaInicio.requestFocus();
+                }else if(horaInicioStr.trim().isEmpty()){
+                    editTextHoraInicio.setError("Elija la hora");
+                    editTextHoraInicio.requestFocus();
+                }else if(fechaFinalStr.trim().isEmpty()){
+                    editTextFechaFinal.setError("Elija la fecha");
+                    editTextFechaFinal.requestFocus();
+                }else if(horaFinalStr.trim().isEmpty()){
+                    editTextHoraFinal.setError("Elija la hora");
+                    editTextHoraFinal.requestFocus();
+                }else if(Integer.parseInt(fechaFinalS[2])<Integer.parseInt(fechaInicioS[2])){
+                    editTextFechaFinal.setError("La fecha final no puede ser menor a la inicial");
+                    editTextFechaFinal.requestFocus();
+                }else if(Integer.parseInt(fechaFinalS[1])<Integer.parseInt(fechaInicioS[1])){
+                    editTextFechaFinal.setError("La fecha final no puede ser menor a la inicial");
+                    editTextFechaFinal.requestFocus();
+                } else if(Integer.parseInt(fechaFinalS[0])<Integer.parseInt(fechaInicioS[0])){
+                    editTextFechaFinal.setError("La fecha final no puede ser menor a la inicial");
+                    editTextFechaFinal.requestFocus();
+                } else if(fechaInicioStr.equals(fechaFinalStr)){
+                    if(Integer.parseInt(horaFinalS[0])<Integer.parseInt(horaInicioS[0])){
+                        editTextHoraFinal.setError("La hora final no puede ser menor a la incial");
+                        editTextHoraFinal.requestFocus();
+                    }else if(Integer.parseInt(horaFinalS[0])<Integer.parseInt(horaInicioS[0])){
+                        editTextHoraFinal.setError("La hora final no puede ser menor a la incial");
+                        editTextHoraFinal.requestFocus();
+                    }
+                }else {
+                    Actividad actividad = new Actividad();
+                    actividad.setTitulo(tituloStr);
+                    actividad.setDescripcion(descripcionStr);
+                    actividad.setFechaInicio(fechaInicioStr);
+                    actividad.setHoraInicio(horaInicioStr);
+                    actividad.setFechaFin(fechaFinalStr);
+                    actividad.setHoraFin(horaFinalStr);
+                    databaseReference.child("users").child(user.getUid()).child("activities").push().setValue(actividad);
+                    Intent intent = new Intent(AgregarActivity.this, ListarActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

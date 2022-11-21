@@ -28,12 +28,16 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import pe.edu.pucp.lab5.dto.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
 
     GoogleSignInClient googleSignInClient;
     FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -63,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseAuth =  FirebaseAuth.getInstance();
         firebaseAuth.setLanguageCode("es-419");
-
+        databaseReference = firebaseDatabase.getReference();
         if(firebaseAuth.getCurrentUser() != null){
             if(firebaseAuth.getCurrentUser().isEmailVerified()){
                 startActivity(new Intent(LoginActivity.this,ListarActivity.class));
@@ -142,7 +146,17 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     if(task.getResult().getAdditionalUserInfo().isNewUser()){
-                        Toast.makeText(LoginActivity.this, "Se crea una cuenta Google", Toast.LENGTH_SHORT).show();
+                        databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).setValue(new Usuario(task.getResult().getAdditionalUserInfo().getUsername(),task.getResult().getAdditionalUserInfo().getUsername(),firebaseAuth.getCurrentUser().getEmail())).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(LoginActivity.this, "Se crea una cuenta Google", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(LoginActivity.this, "Error crea una cuenta Google", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
                     }else{
                         Toast.makeText(LoginActivity.this, "Ingresa con google correctamente", Toast.LENGTH_SHORT).show();
                     }

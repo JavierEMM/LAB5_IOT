@@ -15,8 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +36,7 @@ public class ListarActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     ArrayList<Actividad> listaActividades = new ArrayList<>();
-
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +48,7 @@ public class ListarActivity extends AppCompatActivity {
         adapter.setContext(ListarActivity.this);
         firebaseDatabase= FirebaseDatabase.getInstance();
 
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child("Actividades");
-
-
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("users").child(firebaseAuth.getCurrentUser().getUid()).child("activities");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -59,12 +59,15 @@ public class ListarActivity extends AppCompatActivity {
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(ListarActivity.this));
                 }
+                if(listaActividades.size() == 0){
+                    ((TextView) findViewById(R.id.textView)).setText("No hay actividades");
+                }else{
+                    ((TextView) findViewById(R.id.textView)).setVisibility(View.INVISIBLE);
+                }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
-
 
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
