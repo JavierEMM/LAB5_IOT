@@ -145,13 +145,6 @@ public class AgregarActivity extends AppCompatActivity {
             }
         });
 
-        StorageReference reference = storage.getReference();
-        StorageReference photoRef = reference;
-        if(uri != null){
-            photoRef = reference.child(user.getUid()+"/"+uri.hashCode()+".jpg");
-        }
-        ImageView imageView = findViewById(R.id.imageView);
-        Glide.with(AgregarActivity.this).load(photoRef).into(imageView);
 
         Button btnAgregar = findViewById(R.id.btnAgregar);
         btnAgregar.setOnClickListener(new View.OnClickListener() {
@@ -214,6 +207,22 @@ public class AgregarActivity extends AppCompatActivity {
                     }else if(Integer.parseInt(horaFinalS[0])<Integer.parseInt(horaInicioS[0])){
                         editTextHoraFinal.setError("La hora final no puede ser menor a la incial");
                         editTextHoraFinal.requestFocus();
+                    }
+                } else if((Integer.parseInt(horaInicioS[0])<6)||(Integer.parseInt(horaInicioS[0])>23)){
+                    editTextHoraInicio.setError("No puede haber actividades antes de las 6:00 am");
+                    editTextHoraInicio.requestFocus();
+                } else if(Integer.parseInt(horaInicioS[0])==23){
+                    if(Integer.parseInt(horaInicioS[1])>30){
+                        editTextHoraInicio.setError("No puede haber actividades después de las 11:30 pm");
+                        editTextHoraInicio.requestFocus();
+                    }
+                } else if((Integer.parseInt(horaFinalS[0])<6)||(Integer.parseInt(horaFinalS[0])>23)){
+                    editTextHoraFinal.setError("No puede haber actividades antes de las 6:00 am");
+                    editTextHoraFinal.requestFocus();
+                } else if(Integer.parseInt(horaFinalS[0])==23){
+                    if(Integer.parseInt(horaFinalS[1])>30){
+                        editTextHoraInicio.setError("No puede haber actividades después de las 11:30 pm");
+                        editTextHoraInicio.requestFocus();
                     }
                 }else {
                     Actividad actividad = new Actividad();
