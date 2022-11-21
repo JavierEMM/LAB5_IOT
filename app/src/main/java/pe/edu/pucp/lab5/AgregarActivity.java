@@ -207,6 +207,17 @@ public class AgregarActivity extends AppCompatActivity {
                     }else if(Integer.parseInt(horaFinalS[0])<Integer.parseInt(horaInicioS[0])){
                         editTextHoraFinal.setError("La hora final no puede ser menor a la incial");
                         editTextHoraFinal.requestFocus();
+                    }else{
+                        Actividad actividad = new Actividad();
+                        actividad.setTitulo(tituloStr);
+                        actividad.setDescripcion(descripcionStr);
+                        actividad.setFechaInicio(fechaInicioStr);
+                        actividad.setHoraInicio(horaInicioStr);
+                        actividad.setFechaFin(fechaFinalStr);
+                        actividad.setHoraFin(horaFinalStr);
+                        databaseReference.child("users").child(user.getUid()).child("activities").push().setValue(actividad);
+                        Intent intent = new Intent(AgregarActivity.this, ListarActivity.class);
+                        startActivity(intent);
                     }
                 } else if((Integer.parseInt(horaInicioS[0])<6)||(Integer.parseInt(horaInicioS[0])>23)){
                     editTextHoraInicio.setError("No puede haber actividades antes de las 6:00 am");
@@ -215,6 +226,17 @@ public class AgregarActivity extends AppCompatActivity {
                     if(Integer.parseInt(horaInicioS[1])>30){
                         editTextHoraInicio.setError("No puede haber actividades después de las 11:30 pm");
                         editTextHoraInicio.requestFocus();
+                    }else{
+                        Actividad actividad = new Actividad();
+                        actividad.setTitulo(tituloStr);
+                        actividad.setDescripcion(descripcionStr);
+                        actividad.setFechaInicio(fechaInicioStr);
+                        actividad.setHoraInicio(horaInicioStr);
+                        actividad.setFechaFin(fechaFinalStr);
+                        actividad.setHoraFin(horaFinalStr);
+                        databaseReference.child("users").child(user.getUid()).child("activities").push().setValue(actividad);
+                        Intent intent = new Intent(AgregarActivity.this, ListarActivity.class);
+                        startActivity(intent);
                     }
                 } else if((Integer.parseInt(horaFinalS[0])<6)||(Integer.parseInt(horaFinalS[0])>23)){
                     editTextHoraFinal.setError("No puede haber actividades antes de las 6:00 am");
@@ -223,6 +245,17 @@ public class AgregarActivity extends AppCompatActivity {
                     if(Integer.parseInt(horaFinalS[1])>30){
                         editTextHoraInicio.setError("No puede haber actividades después de las 11:30 pm");
                         editTextHoraInicio.requestFocus();
+                    }else{
+                        Actividad actividad = new Actividad();
+                        actividad.setTitulo(tituloStr);
+                        actividad.setDescripcion(descripcionStr);
+                        actividad.setFechaInicio(fechaInicioStr);
+                        actividad.setHoraInicio(horaInicioStr);
+                        actividad.setFechaFin(fechaFinalStr);
+                        actividad.setHoraFin(horaFinalStr);
+                        databaseReference.child("users").child(user.getUid()).child("activities").push().setValue(actividad);
+                        Intent intent = new Intent(AgregarActivity.this, ListarActivity.class);
+                        startActivity(intent);
                     }
                 }else {
                     Actividad actividad = new Actividad();
