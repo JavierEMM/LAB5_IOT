@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,6 +58,11 @@ public class ListarActivity extends AppCompatActivity {
                     adapter.setListaActividades(listaActividades);
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(ListarActivity.this));
+                }
+                if(listaActividades.size() == 0){
+                    ((TextView) findViewById(R.id.textView)).setText("No hay actividades");
+                }else{
+                    ((TextView) findViewById(R.id.textView)).setVisibility(View.INVISIBLE);
                 }
             }
             @Override
