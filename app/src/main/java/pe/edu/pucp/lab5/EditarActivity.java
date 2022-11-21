@@ -155,6 +155,12 @@ public class EditarActivity extends AppCompatActivity {
 
     }
 
+    public void cancelar (View view){
+        Intent intent = new Intent (EditarActivity.this, AgregarActivity.class);
+        startActivity(intent);
+
+    }
+
 
 
 
