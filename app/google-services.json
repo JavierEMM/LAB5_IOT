@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "900912693370-gqm2teubp8j4osp2vr2187v2vvhgmgi0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.edu.pucp.lab5",
+            "certificate_hash": "33473c52d8d49998fe28e7fd7c3ba3aa87e4bddc"
+          }
+        },
+        {
           "client_id": "900912693370-j78edh4n5m3rd1kmh8fs87ngfopkjba3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
